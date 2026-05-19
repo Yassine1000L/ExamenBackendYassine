@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 // de hoofdroute = /
 Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
 
+
+
+
+// zelf gemaakte routes
 Route::get('/dashboard', function () {
     return view('userzone.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
