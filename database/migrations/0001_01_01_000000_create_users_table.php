@@ -15,18 +15,19 @@ return new class extends Migration
             
             $table->id();
 
-            $table->string('name');
+            $table->string     ('name');
 
-            $table->string('username')->nullable();
-            $table->date('birthday')->nullable();
-            $table->string('profile_photo')->nullable();
-            $table->text('bio')->nullable();
+            $table->string     ('username')->nullable();
+            $table->date       ('birthday')->nullable();
+            $table->string     ('profile_photo')->nullable();
+            $table->text       ('bio')->nullable();
 
-            $table->boolean('is_admin')->default(false);
+            $table->boolean    ('is_admin')->default(false);
 
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string     ('email')->unique();
+            $table->timestamp  ('email_verified_at')->nullable();
+            $table->string     ('password');
+            
             $table->rememberToken();
             $table->timestamps();
 

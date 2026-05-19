@@ -1,9 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NewsController;
+
+
+
 
 // de hoofdroute = /
 Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
+
+
+
+
+
+
+
+
+
+
+
 
 
 
