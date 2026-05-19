@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
-    //Kan niet rechtstreeks in class zetten je moet het binnen een functie zetten.    
+    //Kan niet rechtstreeks in class code zetten, je moet het binnen een functie zetten.    
     
     public function index() {
 

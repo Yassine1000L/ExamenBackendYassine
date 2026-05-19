@@ -6,10 +6,12 @@ use App\Http\Controllers\NewsController;
 
 
 
-// de hoofdroute = /
+// de hoofdroute = ' / '
 Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
 
 
+//dient om niet telkens get te moeten schrijven bij elke route van news
+Route::resource('news', NewsController::class);
 
 
 
@@ -21,6 +23,7 @@ Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name(
 
 
 
+//----------------------------------------------------------------------------------------------------------
 
 
 // zelf gemaakte routes
