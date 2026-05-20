@@ -4,6 +4,11 @@
 
 <style>
 
+body {
+        background-image: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018');
+        background-size: cover;
+        background-position: center;
+}
 table {
     width: 100%;
     border-collapse: collapse;

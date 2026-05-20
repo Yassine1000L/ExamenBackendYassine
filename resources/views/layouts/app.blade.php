@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <title>{{ config('app.name', 'Laravel') }}</title>
@@ -19,7 +19,8 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.1/dist/cdn.min.js"></script>
 </head>
 <body class="font-sans antialiased">
-<div class="min-h-screen bg-gray-100">
+
+<div class="min-h-screen">
     @include('layouts.app_navigation')
 
     <!-- Page Heading -->
