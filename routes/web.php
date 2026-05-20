@@ -20,7 +20,7 @@ Route::resource('news', NewsController::class);
 
 
 // faq routes
-Route::resource('/faqs', FaqController::class);
+Route::resource('faq', FaqController::class);
 
 
 

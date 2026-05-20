@@ -16,7 +16,7 @@
 
         <a href="/news">Nieuws</a>
 
-        <a href="/faqs">FAQ</a>
+        <a href="/faq">FAQ</a>
 
         <a href="/contact">Contact</a>
 
