@@ -1,7 +1,7 @@
 <h1>Nieuws toevoegen </h1>
 
 
-<!-- action news stuur dat naar de store functie -->
+<!-- action news stuur dat naar de store() functie -->
 <form action="/news" method="POST">
 
     @csrf

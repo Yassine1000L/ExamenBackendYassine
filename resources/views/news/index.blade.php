@@ -1,8 +1,14 @@
-<h1>Laatste voetbalnieuws </h1>
+<h1>Laatste voetbalnieuws over FC ERASMUS ! </h1>
 
 @foreach($news as $article)
 
-    <h2>{{ $article->title }}</h2>
+<h2>
+
+    <a href="/news/{{ $article->id }}">
+        {{ $article->title }}
+    </a>
+
+</h2>
 
     <p>{{ $article->content }}</p>
 

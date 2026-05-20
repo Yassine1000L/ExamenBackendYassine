@@ -18,8 +18,9 @@ public function index()
 }
 
 
-    // om de admin nieuwe nieuws items te laten toevoegen,
-    // deze functie stuurt de admin naar een pagina waar hij/zij nieuws kan toevoegen
+
+// om de admin nieuwe nieuws items te laten toevoegen,
+// deze functie stuurt de admin naar een pagina waar hij/zij nieuws kan toevoegen
     
 public function create() {
 
@@ -37,8 +38,15 @@ public function store(Request $request) {
             'published_at' => now(),
         ]);
 
-        //Dus Laravel stuurt je naar ' /news ' nadat je een nieuws item hebt toegevoegd
+        //Dus Laravel stuurt je naar ' /news ' nadat je een nieuwe form item hebt toegevoegd
         return redirect('/news');
 
     }
+
+
+public function show(News $news) {
+
+    return view('news.show', compact('news'));
+
+}
 }
