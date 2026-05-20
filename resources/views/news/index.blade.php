@@ -15,7 +15,7 @@ body {
 
 <div class="container">
 
-<h1>Laatste voetbal NIEUWS over FC Erasmus !</h1>
+<h1 style="background-color: rgba(0, 0, 0, 0.6); color: white; padding: 15px; border-radius: 10px; display: inline-block;">Laatste voetbal NIEUWS over FC Erasmus !</h1>
 
 @auth
 @if(auth()->user()->is_admin)
