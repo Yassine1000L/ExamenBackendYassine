@@ -49,4 +49,14 @@ public function show(News $news) {
     return view('news.show', compact('news'));
 
 }
+
+
+public function destroy(News $news) {
+    
+    $news->delete();
+
+    return redirect('/news');
+}
+
+
 }
