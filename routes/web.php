@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\FaqController;
 
 
 
@@ -15,6 +16,11 @@ rscr dient om niet telkens get te moeten schrijven bij elke route van news crud 
 auth middleware zorgt ervoor dat alleen ingelogde gebruikers toegang hebben tot deze routes 
 */
 Route::resource('news', NewsController::class);
+
+
+
+// faq routes
+Route::resource('/faqs', FaqController::class);
 
 
 
