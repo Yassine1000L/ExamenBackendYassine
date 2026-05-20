@@ -35,7 +35,7 @@ Route::resource('/faqs', FaqController::class);
 //----------------------------------------------------------------------------------------------------------
 
 
-// zelf gemaakte routes
+// het zelf gemaakte routes
 Route::get('/dashboard', function () {
     return redirect('/');
 })->middleware(['auth', 'verified'])->name('dashboard');

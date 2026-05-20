@@ -21,12 +21,20 @@ return new class extends Migration
 
         $table->string('category');
 
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');
+
         $table->timestamps();
     });
 
     }
 
+
+
+
+
+
     /**
+     * ----------------------------------------------------------------
      * Reverse the migrations.
      */
     public function down(): void

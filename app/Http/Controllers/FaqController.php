@@ -8,6 +8,8 @@ use App\Models\Faq;
 
 class FaqController extends Controller
 {
+
+
     
     // om de faq pagina te tonen
     public function index()
@@ -16,6 +18,8 @@ class FaqController extends Controller
 
         return view('faq.index', compact('faqs'));
     }
+
+
 
 
 
@@ -60,10 +64,13 @@ class FaqController extends Controller
             'question' => $request->question,
             'answer' => $request->answer,
             'category' => $request->category,
+            'user_id' => auth()->id(),
         ]);
 
         return redirect('/faq');
     }
+
+
 
 
 
@@ -85,10 +92,12 @@ class FaqController extends Controller
 
 
 
+
+
     public function destroy(Faq $faq)
     {
-
-        if (!auth()->check() || !auth()->user()->is_admin) {
+    
+        if (!auth()->check() || auth()->id() != $faq->user_id) {
 
             return 'Je hebt geen toestemming voor deze operatie.';
         }
@@ -105,13 +114,16 @@ class FaqController extends Controller
 
 
 
+
+
     public function edit(Faq $faq)
     {
 
-        if (!auth()->check() || !auth()->user()->is_admin) {
+       if (!auth()->check() || auth()->id() != $faq->user_id) {
+    
+       return 'Je hebt geen toestemming voor deze operatie.';
 
-            return 'Je hebt geen toestemming voor deze operatie.';
-        }
+     }
 
         return view('faq.edit', compact('faq'));
     }
@@ -123,12 +135,15 @@ class FaqController extends Controller
 
 
 
+    
+
     public function update(Request $request, Faq $faq)
     {
 
-        if (!auth()->check() || !auth()->user()->is_admin) {
+       if (!auth()->check() || auth()->id() != $faq->user_id) {
 
             return 'Je hebt geen toestemming voor deze operatie.';
+
         }
 
         $faq->update([
