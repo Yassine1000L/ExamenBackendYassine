@@ -1,4 +1,13 @@
-<h1>Nieuws toevoegen </h1>
+
+@extends('layouts.app')
+
+@section('content')
+
+
+<div class="container">
+
+    
+<h1>toevoegen </h1>
 
 
 <!-- action news stuur dat naar de store() functie -->
@@ -19,3 +28,7 @@
     </button>
 
 </form>
+
+</div>
+
+@endsection

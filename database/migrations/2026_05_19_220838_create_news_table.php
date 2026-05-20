@@ -21,11 +21,16 @@ return new class extends Migration
 
         $table->timestamp('published_at')->nullable();
 
-        $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
         $table->timestamps();
     });
 }
+
+
+
+
     /**
      * Reverse the migrations.
      */

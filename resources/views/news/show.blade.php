@@ -1,4 +1,14 @@
-<h1>{{ $news->title }}</h1>
+
+
+@extends('layouts.app')
+
+@section('content')
+
+
+
+<div class="container">
+
+    <h1>{{ $news->title }}</h1>
 
 <p>{{ $news->content }}</p>
 
@@ -12,14 +22,27 @@
 
 
 
-// Om een nieuws item te kunnen verwijderen
 <form action="/news/{{ $news->id }}" method="POST">
 
     @csrf
     @method('DELETE')
 
+
+    
+        
+    
     <button type="submit">
         Verwijder nieuws
     </button>
 
+
+
 </form>
+
+</div>
+
+@endsection
+
+
+
+

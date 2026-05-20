@@ -1,4 +1,13 @@
-<h1>Nieuws aanpassen</h1>
+
+
+@extends('layouts.app')
+
+@section('content')
+
+
+<div class="container">
+
+    <h1>Nieuws aanpassen</h1>
 
 <form action="/news/{{ $news->id }}" method="POST">
 
@@ -22,3 +31,8 @@
     </button>
 
 </form>
+
+</div>
+
+@endsection
+

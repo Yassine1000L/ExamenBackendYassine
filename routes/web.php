@@ -10,7 +10,10 @@ use App\Http\Controllers\NewsController;
 Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
 
 
-//dient om niet telkens get te moeten schrijven bij elke route van news
+/*
+rscr dient om niet telkens get te moeten schrijven bij elke route van news crud systeem, 
+auth middleware zorgt ervoor dat alleen ingelogde gebruikers toegang hebben tot deze routes 
+*/
 Route::resource('news', NewsController::class);
 
 
@@ -28,7 +31,7 @@ Route::resource('news', NewsController::class);
 
 // zelf gemaakte routes
 Route::get('/dashboard', function () {
-    return view('userzone.dashboard');
+    return redirect('/');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

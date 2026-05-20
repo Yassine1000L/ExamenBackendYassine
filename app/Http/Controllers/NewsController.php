@@ -1,13 +1,16 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\News;
-
+use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
     
+
+
 
 // om de nieuws pagina te kunnen tonen. 
 public function index()
@@ -19,27 +22,53 @@ public function index()
 
 
 
-// om de admin nieuwe nieuws items te laten toevoegen,   
+
+
+
+
 public function create() {
 
-        return view('news.create');
+// om de admin nieuws items te laten toevoegen  
 
+
+
+    if (!auth()->check() || !auth()->user()->is_admin) {
+
+        return 'Je hebt geen toestemming voor deze operatie.';
     }
+    
+    else {
+    return view('news.create');
+    }
+}
+
+    
+
+
 
 
 
 // is gedaan om nieuws toe te voegen aan de DB en daarna terug te sturen naar de news pagina
 public function store(Request $request) {
-        News::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'published_at' => now(),
-        ]);
 
-        //Dus Laravel stuurt je naar ' /news ' nadat je een nieuwe form item hebt toegevoegd
-        return redirect('/news');
+    if (!auth()->check() || !auth()->user()->is_admin) {
 
+        return 'Je hebt geen toestemming voor deze operatie.';
     }
+
+    News::create([
+        'title' => $request->title,
+        'content' => $request->content,
+        'published_at' => now(),
+        'user_id' => auth()->id()
+    ]);
+
+    return redirect('/news');
+}
+
+
+
+
 
 
 public function show(News $news) {
@@ -49,7 +78,16 @@ public function show(News $news) {
 }
 
 
+
+
+
+
 public function destroy(News $news) {
+
+    if (!auth()->check() || !auth()->user()->is_admin) {
+
+        return 'Je hebt geen toestemming voor deze operatie.';
+    }
 
     $news->delete();
 
@@ -57,7 +95,17 @@ public function destroy(News $news) {
 }
 
 
+
+
+
 public function edit(News $news) {
+
+    if (!auth()->check() || !auth()->user()->is_admin) {
+    
+
+        return 'Je hebt geen toestemming voor deze operatie.';
+    
+    }
 
     return view('news.edit', compact('news'));
 
@@ -65,8 +113,18 @@ public function edit(News $news) {
 
 
 
+
+
+
+
 public function update(Request $request, News $news) {
 
+    if (!auth()->check() || !auth()->user()->is_admin) {
+                
+            return 'Je hebt geen toestemming voor deze operatie.';
+    
+        }
+        
     $news->update([
         'title' => $request->title,
         'content' => $request->content,

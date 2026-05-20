@@ -1,20 +1,42 @@
-<h1>Laatste voetbalnieuws over FC ERASMUS ! </h1>
+@extends('layouts.app')
+
+@section('content')
+
+<div class="container">
+
+<h1>Laatste voetbal NIEUWS over FC Erasmus !</h1>
+
+@auth
+@if(auth()->user()->is_admin)
+
+<a class="btn" href="/news/create">
+    Nieuwe NEWS toevoegen
+</a>
+
+<br><br>
+
+@endif
+
+
+@endauth
+
 
 @foreach($news as $article)
 
+<div class="news-card">
 
-//Wanneer je op titel klikt ga je naar de show pagina van dat nieuws item
-<h2>
-
-    <a href="/news/{{ $article->id }}">
-        {{ $article->title }}
-    </a>
-
-</h2>
-
+    <h2>
+        <a href="/news/{{ $article->id }}">
+            {{ $article->title }}
+        </a>
+    </h2>
 
     <p>{{ $article->content }}</p>
 
-    <hr>
+</div>
 
 @endforeach
+
+</div>
+
+@endsection
