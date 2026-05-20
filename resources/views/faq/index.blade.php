@@ -5,6 +5,41 @@
 
 <div class="container">
 
+<style>
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+th {
+    background-color: #0b1220;
+    color: white;
+    padding: 15px;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+form {
+    display: inline;
+}
+
+</style>
+
+<div class="container">
+
     <h1>FAQ Pagina</h1>
 
     <a href="/faq/create">
