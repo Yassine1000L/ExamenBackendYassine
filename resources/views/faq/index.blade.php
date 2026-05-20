@@ -8,7 +8,7 @@
     <h1>FAQ Pagina</h1>
 
     <a href="/faq/create">
-        <button>FAQ toevoegen</button>
+        <button>Een FAQ toevoegen</button>
     </a>
 
     <br><br>
