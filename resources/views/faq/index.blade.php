@@ -17,24 +17,41 @@ th {
     background-color: #0b1220;
     color: white;
     padding: 15px;
+    text-align: center;
 }
 
 td {
     padding: 15px;
     border-bottom: 1px solid #ccc;
+    text-align: center;
+    vertical-align: middle;
+}
+
+td form,
+td a {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
 }
 
 button {
     background-color: red;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 8px 12px;
     border-radius: 8px;
+    cursor: pointer;
+    width: 90px;
+    margin-bottom: 5px;
+
 }
 
 form {
-    display: inline;
+    display: block;
+
 }
+
+
 
 </style>
 
@@ -43,7 +60,7 @@ form {
     <h1>FAQ Pagina</h1>
 
     <a href="/faq/create">
-        <button>Een FAQ toevoegen</button>
+        <button>FAQ toevoegen</button>
     </a>
 
     <br><br>
