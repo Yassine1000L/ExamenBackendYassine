@@ -2,9 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* =========================
-   BODY
-========================= */
+
 
 body {
     margin: 0;
@@ -14,9 +12,7 @@ body {
 
 }
 
-/* =========================
-   NAVBAR
-========================= */
+
 
 nav {
     background-color: #111827;
@@ -47,9 +43,7 @@ nav a:hover {
     color: #22c55e;
 }
 
-/* =========================
-   LOGOUT BUTTON
-========================= */
+
 
 .logout-btn {
     background-color: #dc2626;
@@ -65,9 +59,7 @@ nav a:hover {
     background-color: hsla(0, 97%, 45%, 0.87);
 }
 
-/* =========================
-   CONTAINER
-========================= */
+
 
 .container {
     max-width: 1000px;
@@ -75,9 +67,7 @@ nav a:hover {
     padding: 30px;
 }
 
-/* =========================
-   TITELS
-========================= */
+
 
 h1 {
     text-align: center;
@@ -89,6 +79,7 @@ h1 {
 
 h2 {
     margin-bottom: 15px;
+    font-weight: bold;
 }
 
 h2 a {
@@ -101,9 +92,7 @@ h2 a:hover {
     color: #22c55e;
 }
 
-/* =========================
-   NIEUWS BLOKKEN
-========================= */
+
 
 .news-card {
     background-color: white;
@@ -122,9 +111,7 @@ h2 a:hover {
     box-shadow: 0px 8px 20px rgba(0,0,0,0.15);
 }
 
-/* =========================
-   PARAGRAFEN
-========================= */
+
 
 p {
     font-size: 18px;
@@ -132,9 +119,7 @@ p {
     color: #374151;
 }
 
-/* =========================
-   ALGEMENE LINKS
-========================= */
+
 
 a {
     color: #2563eb;
@@ -146,9 +131,7 @@ a:hover {
     text-decoration: underline;
 }
 
-/* =========================
-   FORMULIEREN
-========================= */
+
 
 input,
 textarea {
@@ -170,9 +153,7 @@ textarea {
     min-height: 180px;
 }
 
-/* =========================
-   BUTTONS
-========================= */
+
 
 button,
 .btn {
@@ -199,9 +180,7 @@ button:hover,
     ackground-color: hsla(0, 97%, 45%, 0.87);
 }
 
-/* =========================
-   HR
-========================= */
+
 
 hr {
     border: none;
@@ -209,9 +188,7 @@ hr {
     margin: 30px 0;
 }
 
-/* =========================
-   HERO SECTION
-========================= */
+
 
 .hero {
     height: 90vh;
