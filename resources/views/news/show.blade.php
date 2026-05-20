@@ -6,6 +6,13 @@
     Terug naar nieuws gaan.
 </a>
 
+<a href="/news/{{ $news->id }}/edit">
+    Nieuws aanpassen
+</a>
+
+
+
+// Om een nieuws item te kunnen verwijderen
 <form action="/news/{{ $news->id }}" method="POST">
 
     @csrf

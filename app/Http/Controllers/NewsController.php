@@ -19,9 +19,7 @@ public function index()
 
 
 
-// om de admin nieuwe nieuws items te laten toevoegen,
-// deze functie stuurt de admin naar een pagina waar hij/zij nieuws kan toevoegen
-    
+// om de admin nieuwe nieuws items te laten toevoegen,   
 public function create() {
 
         return view('news.create');
@@ -52,11 +50,30 @@ public function show(News $news) {
 
 
 public function destroy(News $news) {
-    
+
     $news->delete();
 
     return redirect('/news');
 }
 
+
+public function edit(News $news) {
+
+    return view('news.edit', compact('news'));
+
+}
+
+
+
+public function update(Request $request, News $news) {
+
+    $news->update([
+        'title' => $request->title,
+        'content' => $request->content,
+    ]);
+
+    return redirect('/news');
+
+}
 
 }
