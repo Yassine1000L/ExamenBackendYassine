@@ -50,6 +50,14 @@ button {
 
     <h1 style="background-color: rgba(0, 0, 0, 0.6); color: white; padding: 15px; border-radius: 10px; display: inline-block;">Admin - Gebruikers beheren</h1>
 
+    <br><br>
+
+    <a href="/admin/users/create">
+        <button>Nieuwe gebruiker</button>
+    </a>
+
+    <br><br>
+
     <table>
         <tr>
             <th>Naam</th>
