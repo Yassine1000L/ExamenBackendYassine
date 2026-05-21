@@ -94,6 +94,8 @@ body {
             <label for="password">Wachtwoord</label>
             <input type="password" name="password" id="password" placeholder="Wachtwoord" required>
 
+
+            <!-- vinkje voor admin rechten -->
             <label class="checkbox-label">
                 <input type="checkbox" name="is_admin">
                 Admin-rechten geven
