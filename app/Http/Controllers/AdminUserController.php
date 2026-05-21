@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminUserController extends Controller
 {
-
-//admin rechten 
-    public function index() {
-
+    public function index()
+    {
         if (! auth()->check() || ! auth()->user()->is_admin) {
             return 'Je hebt geen toestemming voor deze operatie.';
         }
@@ -19,13 +19,37 @@ class AdminUserController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
+    public function create()
+    {
+        if (! auth()->check() || ! auth()->user()->is_admin) {
+            return 'Je hebt geen toestemming voor deze operatie.';
+        }
 
+        return view('admin.users.create');
+    }
 
+    public function store(Request $request)
+    {
+        if (! auth()->check() || ! auth()->user()->is_admin) {
+            return 'Je hebt geen toestemming voor deze operatie.';
+        }
 
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
+        ]);
 
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'is_admin' => $request->has('is_admin'),
+        ]);
 
+        return redirect('/admin/users');
+    }
 
-// toggle admin rechten van een gebruiker 0 naar 1 of van 1 naar 0
     public function toggleAdmin(User $user)
     {
         if (! auth()->check() || ! auth()->user()->is_admin) {
