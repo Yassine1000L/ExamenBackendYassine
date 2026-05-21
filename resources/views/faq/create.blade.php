@@ -4,7 +4,7 @@
 
 <div class="container">
 
-    <h1>Een FAQ toevoegen..</h1>
+    <h1 style="background-color: rgba(0, 0, 0, 0.6); color: white; padding: 15px; border-radius: 10px; display: inline-block;">Een FAQ toevoegen..</h1>
 
     <form action="/faq" method="POST">
 
