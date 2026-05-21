@@ -36,6 +36,10 @@
 
         @auth
 
+            @if(auth()->user()->is_admin)
+                <a href="/admin/users">Admin</a>
+            @endif
+
             <p>Welkom, {{ auth()->user()->name }}</p>
 
             <form action="/logout" method="POST">
