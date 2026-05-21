@@ -6,8 +6,10 @@ use App\Models\User;
 
 class AdminUserController extends Controller
 {
-    public function index()
-    {
+
+//admin rechten 
+    public function index() {
+
         if (! auth()->check() || ! auth()->user()->is_admin) {
             return 'Je hebt geen toestemming voor deze operatie.';
         }
@@ -17,6 +19,13 @@ class AdminUserController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
+
+
+
+
+
+
+// toggle admin rechten van een gebruiker 0 naar 1 of van 1 naar 0
     public function toggleAdmin(User $user)
     {
         if (! auth()->check() || ! auth()->user()->is_admin) {
