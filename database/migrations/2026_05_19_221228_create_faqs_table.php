@@ -11,27 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-       
-    Schema::create('faqs', function (Blueprint $table) {
-        
-        $table->id();
 
-        $table->string('question');
-        $table->text('answer');
+        Schema::create('faqs', function (Blueprint $table) {
 
-        $table->string('category');
+            $table->id();
 
-        $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('question');
+            $table->text('answer');
 
-        $table->timestamps();
-    });
+            $table->string('category');
+
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+
+            $table->timestamps();
+        });
 
     }
-
-
-
-
-
 
     /**
      * ----------------------------------------------------------------

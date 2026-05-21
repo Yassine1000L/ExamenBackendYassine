@@ -1,48 +1,38 @@
-
-
 @extends('layouts.app')
 
 @section('content')
 
 <style>
+
 body {
     background-image: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    min-height: 100vh;
 }
+
 </style>
 
 <div class="container">
 
-    <h1>Nieuws aanpassen</h1>
+    <h1 style="background-color: rgba(0, 0, 0, 0.6); color: white; padding: 15px; border-radius: 10px; display: inline-block;">Nieuws aanpassen</h1>
 
-<form action="/news/{{ $news->id }}" method="POST">
+    <form action="/news/{{ $news->id }}" method="POST">
 
-    @csrf
-    @method('PUT')
+        @csrf
+        @method('PUT')
 
-    <input 
-        type="text" 
-        name="title" 
-        value="{{ $news->title }}"
-    >
+        <input type="text" name="title" value="{{ $news->title }}">
 
-    <br><br>
+        <br><br>
 
-    <textarea name="content">{{ $news->content }}</textarea>
+        <textarea name="content">{{ $news->content }}</textarea>
 
-    <br><br>
+        <br><br>
 
-    <button type="submit">
-        Opslaan
-    </button>
+        <button type="submit">Opslaan</button>
 
-</form>
+    </form>
 
 </div>
 
 @endsection
-
