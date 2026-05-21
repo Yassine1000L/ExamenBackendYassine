@@ -9,27 +9,23 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
- 
-    public function up(): void {
+    public function up(): void
+    {
 
-    Schema::create('news', function (Blueprint $table) {
-        $table->id();
+        Schema::create('news', function (Blueprint $table) {
+            $table->id();
 
-        $table->string('title');
-        $table->text('content');
-        $table->string('image')->nullable();
+            $table->string('title');
+            $table->text('content');
+            $table->string('image')->nullable();
 
-        $table->timestamp('published_at')->nullable();
+            $table->timestamp('published_at')->nullable();
 
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
-        $table->foreignId('user_id')->constrained()->onDelete('cascade');
-
-        $table->timestamps();
-    });
-}
-
-
-
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.
