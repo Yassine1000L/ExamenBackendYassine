@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminUserController extends Controller
 {
+
+
+
     public function index()
     {
         if (! auth()->check() || ! auth()->user()->is_admin) {
@@ -18,6 +21,10 @@ class AdminUserController extends Controller
 
         return view('admin.users.index', compact('users'));
     }
+
+
+
+    
 
     public function create()
     {
