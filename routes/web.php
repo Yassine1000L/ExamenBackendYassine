@@ -26,10 +26,6 @@ Route::get('/dashboard', function () {
     return redirect('/');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
-
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -38,6 +34,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/users', [AdminUserController::class, 'index']);
+    Route::get('/users/create', [AdminUserController::class, 'create']);
+    Route::post('/users/create', [AdminUserController::class, 'store']);
     Route::post('/users/{user}/toggle-admin', [AdminUserController::class, 'toggleAdmin']);
 });
 
