@@ -60,7 +60,7 @@ form {
 
 <div class="container">
 
-    <h1>FAQ aanpassen</h1>
+    <h1 style="background-color: rgba(0, 0, 0, 0.6); color: white; padding: 15px; border-radius: 10px; display: inline-block;">FAQ aanpassen</h1>
 
     <form action="/faq/{{ $faq->id }}" method="POST">
 

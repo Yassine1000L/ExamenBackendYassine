@@ -55,7 +55,7 @@ form {
 
 <div class="container">
 
-    <h1>FAQ Detail</h1>
+    <h1 style="background-color: rgba(0, 0, 0, 0.6); color: white; padding: 15px; border-radius: 10px; display: inline-block;">FAQ Detail</h1>
 
     <table border="1" cellpadding="10">
 

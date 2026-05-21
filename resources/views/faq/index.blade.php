@@ -75,7 +75,9 @@ form {
 
 <div class="container">
 
-    <h1>FAQ Pagina</h1>
+    <h1 style="background-color: rgba(0, 0, 0, 0.6); color: white; padding: 15px; border-radius: 10px; display: inline-block;">FAQ Pagina</h1>
+
+    <br><br>
 
     <a href="/faq/create">
         <button>FAQ toevoegen</button>
