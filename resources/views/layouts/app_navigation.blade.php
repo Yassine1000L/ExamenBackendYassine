@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>FC Erasmus !</title>
-</head>
-
-<body>
-
-   <nav>
+<nav>
 
     <div class="nav-left">
 
@@ -40,6 +30,8 @@
                 <a href="/admin/users">Admin</a>
             @endif
 
+            <a href="/profile">Profiel</a>
+
             <p>Welkom, {{ auth()->user()->name }}</p>
 
             <form action="/logout" method="POST">
@@ -57,10 +49,3 @@
     </div>
 
 </nav>
-
-    @yield('content') <!-- Hier komt de content van de pagina -->
-
-</body>
-
-</html>
-
