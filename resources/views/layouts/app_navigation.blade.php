@@ -27,7 +27,8 @@
         @auth
 
             @if(auth()->user()->is_admin)
-                <a href="/admin/users">Admin</a>
+                <a href="/admin/users">Gebruikers</a>
+                <a href="/admin/contacts">Berichten</a>
             @endif
 
             <a href="/profile">Profiel</a>
