@@ -56,8 +56,6 @@ Route::middleware('auth')->group(function () {
 });
 
 // het zelf gemaakte routes
-Route::get('/dashboard', function () {
-    return redirect('/');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [WelcomeController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
