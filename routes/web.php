@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\Userzone\ProfileController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/faq/{id}', [FaqController::class, 'show']);
+
+// contact routes
+Route::get('/contact', [ContactController::class, 'create']);
+Route::post('/contact', [ContactController::class, 'store']);
 
 // publieke profielpagina voor alle bezoekers
 Route::get('/users/{id}', [ProfileController::class, 'show']);
