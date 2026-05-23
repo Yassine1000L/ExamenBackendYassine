@@ -17,7 +17,7 @@ class CommentController extends Controller
         $news = News::find($news_id);
 
         if (! $news) {
-            return 'Nieuwsartikel niet gevonden.';
+            return 'Nieuwsartikel niet gevonden ';
         }
 
         $request->validate([
