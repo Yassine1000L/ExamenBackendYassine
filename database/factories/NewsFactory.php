@@ -3,22 +3,20 @@
 namespace Database\Factories;
 
 use App\Models\News;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends Factory<News>
- */
 class NewsFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = News::class;
+
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->sentence(),
+            'content' => fake()->paragraphs(3, true),
+            'published_at' => date('Y-m-d H:i:s'),
+            'user_id' => User::factory(),
         ];
     }
 }
