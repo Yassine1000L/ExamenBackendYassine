@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\NewsController;
@@ -36,6 +37,12 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/faq/{id}', [FaqController::class, 'show']);
+
+// comment routes
+Route::middleware('auth')->group(function () {
+    Route::post('/news/{id}/comments', [CommentController::class, 'store']);
+    Route::delete('/comments/{id}', [CommentController::class, 'destroy']);
+});
 
 // contact routes
 Route::get('/contact', [ContactController::class, 'create']);

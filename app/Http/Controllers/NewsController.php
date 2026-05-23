@@ -46,7 +46,7 @@ class NewsController extends Controller
 
     public function show($id)
     {
-        $news = News::find($id);
+        $news = News::with('comments.user')->find($id);
 
         if (! $news) {
             return 'Nieuwsartikel niet gevonden.';

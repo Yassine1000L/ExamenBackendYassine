@@ -98,6 +98,8 @@ form {
         <button>Terug naar nieuws</button>
     </a>
 
+    @auth
+    @if(auth()->user()->is_admin)
     <a href="/news/{{ $news->id }}/edit">
         <button>Nieuws aanpassen</button>
     </a>
@@ -107,6 +109,44 @@ form {
         @method('DELETE')
         <button type="submit">Verwijder nieuws</button>
     </form>
+    @endif
+    @endauth
+
+</div>
+
+<br><br>
+
+<div class="container" style="background-color: white; padding: 20px; border-radius: 15px;">
+
+    <h2>Reacties</h2>
+
+    @foreach($news->comments as $comment)
+    <div style="border-bottom: 1px solid #ccc; padding: 10px 0;">
+        <p><strong>{{ $comment->user->name }}</strong> - {{ date('d-m-Y H:i', strtotime($comment->created_at)) }}</p>
+        <p>{{ $comment->content }}</p>
+
+        @auth
+        @if(auth()->user()->is_admin)
+        <form action="/comments/{{ $comment->id }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Verwijder</button>
+        </form>
+        @endif
+        @endauth
+    </div>
+    @endforeach
+
+    @auth
+    <form action="/news/{{ $news->id }}/comments" method="POST" style="margin-top: 20px;">
+        @csrf
+        <textarea name="content" placeholder="Schrijf een reactie..." rows="3" style="width: 100%; padding: 10px;" required></textarea>
+        <br><br>
+        <button type="submit" style="background-color: #0b1220; width: auto;">Reactie plaatsen</button>
+    </form>
+    @else
+    <p><a href="/login">Log in</a> om een reactie te plaatsen.</p>
+    @endauth
 
 </div>
 
