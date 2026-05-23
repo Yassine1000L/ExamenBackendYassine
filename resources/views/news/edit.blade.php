@@ -21,11 +21,11 @@ body {
         @csrf
         @method('patch')
 
-        <input type="text" name="title" value="{{ $news->title }}">
+        <input type="text" name="title" value="{{ $news->title }}" required maxlength="255">
 
         <br><br>
 
-        <textarea name="content">{{ $news->content }}</textarea>
+        <textarea name="content" required>{{ $news->content }}</textarea>
 
         <br><br>
 

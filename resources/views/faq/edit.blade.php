@@ -71,11 +71,13 @@ form {
             type="text" 
             name="question" 
             value="{{ $faq->question }}"
+            required
+            maxlength="255"
         >
 
         <br><br>
 
-        <textarea name="answer">{{ $faq->answer }}</textarea>
+        <textarea name="answer" required>{{ $faq->answer }}</textarea>
 
         <br><br>
 
@@ -83,6 +85,8 @@ form {
             type="text" 
             name="category" 
             value="{{ $faq->category }}"
+            required
+            maxlength="255"
         >
 
         <br><br>

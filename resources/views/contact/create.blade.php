@@ -47,15 +47,15 @@ button {
 
         @csrf
 
-        <input type="text" name="name" placeholder="Naam" value="{{ old('name') }}">
+        <input type="text" name="name" placeholder="Naam" value="{{ old('name') }}" required maxlength="255">
 
         <br>
 
-        <input type="email" name="email" placeholder="Email" value="{{ old('email') }}">
+        <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required maxlength="255">
 
         <br>
 
-        <textarea name="message" placeholder="Bericht" rows="5">{{ old('message') }}</textarea>
+        <textarea name="message" placeholder="Bericht" rows="5" required></textarea>
 
         <br>
 

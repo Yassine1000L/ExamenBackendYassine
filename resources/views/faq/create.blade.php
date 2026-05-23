@@ -10,15 +10,15 @@
 
         @csrf
 
-        <input type="text" name="question" placeholder="Vraag">
+        <input type="text" name="question" placeholder="Vraag" required maxlength="255">
 
         <br><br>
 
-        <textarea name="answer" placeholder="Antwoord"></textarea>
+        <textarea name="answer" placeholder="Antwoord" required></textarea>
 
         <br><br>
 
-        <input type="text" name="category" placeholder="Categorie">
+        <input type="text" name="category" placeholder="Categorie" required maxlength="255">
 
         <br><br>
 

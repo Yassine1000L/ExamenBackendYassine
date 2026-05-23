@@ -20,11 +20,11 @@ body {
 
         @csrf
 
-        <input type="text" name="title" placeholder="Titel">
+        <input type="text" name="title" placeholder="Titel" required maxlength="255">
 
         <br><br>
 
-        <textarea name="content" placeholder="Inhoud"></textarea>
+        <textarea name="content" placeholder="Inhoud" required></textarea>
 
         <br><br>
 
