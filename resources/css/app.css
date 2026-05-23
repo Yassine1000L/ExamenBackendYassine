@@ -54,7 +54,6 @@ nav a:hover {
     padding: 10px 15px;
     border-radius: 8px;
     cursor: pointer;
-    transition: 0.3s;
 }
 
 .logout-btn:hover {
@@ -179,7 +178,7 @@ button,
 
 button:hover,
 .btn:hover {
-    background-color: hsla(0, 97%, 45%, 0.87);
+    ackground-color: hsla(0, 97%, 45%, 0.87);
 }
 
 
