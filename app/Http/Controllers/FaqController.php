@@ -11,7 +11,12 @@ class FaqController extends Controller
     {
         $faqs = Faq::all();
 
-        return view('faq.index', compact('faqs'));
+        $grouped = [];
+        foreach ($faqs as $faq) {
+            $grouped[$faq->category][] = $faq;
+        }
+
+        return view('faq.index', compact('grouped'));
     }
 
     public function create()
@@ -58,7 +63,7 @@ class FaqController extends Controller
             return 'FAQ niet gevonden.';
         }
 
-        if (! auth()->check() || auth()->user()->id != $faq->user_id) {
+        if (! auth()->check() || ! auth()->user()->is_admin) {
             return 'Je hebt geen toestemming voor deze operatie.';
         }
 
@@ -73,7 +78,7 @@ class FaqController extends Controller
             return 'FAQ niet gevonden.';
         }
 
-        if (! auth()->check() || auth()->user()->id != $faq->user_id) {
+        if (! auth()->check() || ! auth()->user()->is_admin) {
             return 'Je hebt geen toestemming voor deze operatie.';
         }
 
@@ -93,7 +98,7 @@ class FaqController extends Controller
             return 'FAQ niet gevonden.';
         }
 
-        if (! auth()->check() || auth()->user()->id != $faq->user_id) {
+        if (! auth()->check() || ! auth()->user()->is_admin) {
             return 'Je hebt geen toestemming voor deze operatie.';
         }
 

@@ -79,57 +79,66 @@ form {
 
     <br><br>
 
+    @auth
+    @if(auth()->user()->is_admin)
+
     <a href="/faq/create">
         <button>FAQ toevoegen</button>
     </a>
 
     <br><br>
 
-    <table>
+    @endif
+    @endauth
 
-        <tr>
-            <th>Vraag</th>
-            <th>Antwoord</th>
-            <th>Categorie</th>
-            <th>Acties</th>
-        </tr>
+    @foreach($grouped as $category => $faqs)
 
-        @foreach($faqs as $faq)
+        <h2 style="color: white; margin-top: 30px;">{{ $category }}</h2>
 
-        <tr>
+        <table>
 
-            <td>{{ $faq->question }}</td>
+            <tr>
+                <th>Vraag</th>
+                <th>Antwoord</th>
+                <th>Acties</th>
+            </tr>
 
-            <td>{{ $faq->answer }}</td>
+            @foreach($faqs as $faq)
 
-            <td>{{ $faq->category }}</td>
+            <tr>
 
-            <td>
+                <td>{{ $faq->question }}</td>
 
-                <a href="/faq/{{ $faq->id }}">
-                    <button>Bekijk</button>
-                </a>
+                <td>{{ $faq->answer }}</td>
 
-                <a href="/faq/{{ $faq->id }}/edit">
-                    <button>Edit</button>
-                </a>
+                <td>
 
-                <form action="/faq/{{ $faq->id }}" method="POST">
+                    <a href="/faq/{{ $faq->id }}">
+                        <button>Bekijk</button>
+                    </a>
 
-                    @csrf
-                    @method('DELETE')
+                    <a href="/faq/{{ $faq->id }}/edit">
+                        <button>Edit</button>
+                    </a>
 
-                    <button type="submit">Delete</button>
+                    <form action="/faq/{{ $faq->id }}" method="POST">
 
-                </form>
+                        @csrf
+                        @method('DELETE')
 
-            </td>
+                        <button type="submit">Delete</button>
 
-        </tr>
+                    </form>
 
-        @endforeach
+                </td>
 
-    </table>
+            </tr>
+
+            @endforeach
+
+        </table>
+
+    @endforeach
 
 </div>
 
