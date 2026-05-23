@@ -65,7 +65,7 @@ form {
     <form action="/faq/{{ $faq->id }}" method="POST">
 
         @csrf
-        @method('PUT')
+        @method('patch')
 
         <input 
             type="text" 

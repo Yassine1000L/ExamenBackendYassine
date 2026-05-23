@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {
-    // om de faq pagina te tonen
     public function index()
     {
         $faqs = Faq::all();
@@ -15,84 +14,90 @@ class FaqController extends Controller
         return view('faq.index', compact('faqs'));
     }
 
-    // om de admin faq items te laten toevoegen
     public function create()
     {
-
         if (! auth()->check() || ! auth()->user()->is_admin) {
-
             return 'Je hebt geen toestemming voor deze operatie.';
-        } else {
-
-            return view('faq.create');
-
         }
+
+        return view('faq.create');
     }
 
-    // om faq toe te voegen aan de DB en daarna terug te sturen naar de faq pagina
     public function store(Request $request)
     {
-
         if (! auth()->check() || ! auth()->user()->is_admin) {
-
             return 'Je hebt geen toestemming voor deze operatie.';
         }
 
-        Faq::create([
-            'question' => $request->question,
-            'answer' => $request->answer,
-            'category' => $request->category,
-            'user_id' => auth()->id(),
-        ]);
+        $faq = new Faq;
+        $faq->question = $request->question;
+        $faq->answer = $request->answer;
+        $faq->category = $request->category;
+        $faq->user_id = auth()->user()->id;
+        $faq->save();
 
         return redirect('/faq');
     }
 
-    public function show(Faq $faq)
+    public function show($id)
     {
+        $faq = Faq::find($id);
+
+        if (! $faq) {
+            return 'FAQ niet gevonden.';
+        }
 
         return view('faq.show', compact('faq'));
     }
 
-    public function destroy(Faq $faq)
+    public function edit($id)
     {
+        $faq = Faq::find($id);
 
-        if (! auth()->check() || auth()->id() != $faq->user_id) {
-
-            return 'Je hebt geen toestemming voor deze operatie.';
+        if (! $faq) {
+            return 'FAQ niet gevonden.';
         }
 
-        $faq->delete();
-
-        return redirect('/faq');
-    }
-
-    public function edit(Faq $faq)
-    {
-
-        if (! auth()->check() || auth()->id() != $faq->user_id) {
-
+        if (! auth()->check() || auth()->user()->id != $faq->user_id) {
             return 'Je hebt geen toestemming voor deze operatie.';
-
         }
 
         return view('faq.edit', compact('faq'));
     }
 
-    public function update(Request $request, Faq $faq)
+    public function update(Request $request, $id)
     {
+        $faq = Faq::find($id);
 
-        if (! auth()->check() || auth()->id() != $faq->user_id) {
-
-            return 'Je hebt geen toestemming voor deze operatie.';
-
+        if (! $faq) {
+            return 'FAQ niet gevonden.';
         }
 
-        $faq->update([
-            'question' => $request->question,
-            'answer' => $request->answer,
-            'category' => $request->category,
-        ]);
+        if (! auth()->check() || auth()->user()->id != $faq->user_id) {
+            return 'Je hebt geen toestemming voor deze operatie.';
+        }
+
+        $faq->question = $request->question;
+        $faq->answer = $request->answer;
+        $faq->category = $request->category;
+        $faq->save();
+
+        return redirect('/faq');
+    }
+
+    public function destroy($id)
+    {
+        $faq = Faq::find($id);
+
+        if (! $faq) {
+            return 'FAQ niet gevonden.';
+        }
+
+        if (! auth()->check() || auth()->user()->id != $faq->user_id) {
+            return 'Je hebt geen toestemming voor deze operatie.';
+        }
+
+        $faq->delete();
 
         return redirect('/faq');
     }

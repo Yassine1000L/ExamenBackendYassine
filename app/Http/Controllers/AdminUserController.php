@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminUserController extends Controller
 {
-
-
-
     public function index()
     {
         if (! auth()->check() || ! auth()->user()->is_admin) {
@@ -21,12 +18,6 @@ class AdminUserController extends Controller
 
         return view('admin.users.index', compact('users'));
     }
-
-
-
-
-
-    
 
     public function create()
     {
@@ -49,29 +40,34 @@ class AdminUserController extends Controller
             'password' => ['required', 'string', 'min:8'],
         ]);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'is_admin' => $request->has('is_admin'),
-        ]);
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->is_admin = $request->has('is_admin');
+        $user->save();
 
         return redirect('/admin/users');
     }
 
-    public function toggleAdmin(User $user)
+    public function toggleAdmin($id)
     {
         if (! auth()->check() || ! auth()->user()->is_admin) {
             return 'Je hebt geen toestemming voor deze operatie.';
         }
 
-        if ($user->id === auth()->id()) {
+        $user = User::find($id);
+
+        if (! $user) {
+            return 'Gebruiker niet gevonden.';
+        }
+
+        if ($user->id === auth()->user()->id) {
             return 'Je kunt je eigen admin-rechten niet wijzigen.';
         }
 
-        $user->update([
-            'is_admin' => ! $user->is_admin,
-        ]);
+        $user->is_admin = ! $user->is_admin;
+        $user->save();
 
         return redirect('/admin/users');
     }
