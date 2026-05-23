@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    // om de nieuws pagina te kunnen tonen.
     public function index()
     {
         $news = News::all();
@@ -17,84 +16,98 @@ class NewsController extends Controller
 
     public function create()
     {
-
-        // om de admin nieuws items te laten toevoegen
-
         if (! auth()->check() || ! auth()->user()->is_admin) {
-
             return 'Je hebt geen toestemming voor deze operatie.';
-        } else {
-            return view('news.create');
         }
+
+        return view('news.create');
     }
 
-    // is gedaan om nieuws toe te voegen aan de DB en daarna terug te sturen naar de news pagina
     public function store(Request $request)
     {
-
         if (! auth()->check() || ! auth()->user()->is_admin) {
-
             return 'Je hebt geen toestemming voor deze operatie.';
         }
 
-        News::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'published_at' => now(),
-            'user_id' => auth()->id(),
-        ]);
+        $news = new News;
+        $news->title = $request->title;
+        $news->content = $request->content;
+        $news->published_at = date('Y-m-d H:i:s');
+        $news->user_id = auth()->user()->id;
+
+        if ($request->hasFile('image')) {
+            $news->image = $request->file('image')->store('news-images', 'public');
+        }
+
+        $news->save();
 
         return redirect('/news');
     }
 
-    public function show(News $news)
+    public function show($id)
     {
+        $news = News::find($id);
+
+        if (! $news) {
+            return 'Nieuwsartikel niet gevonden.';
+        }
 
         return view('news.show', compact('news'));
-
     }
 
-    public function destroy(News $news)
+    public function edit($id)
     {
-
         if (! auth()->check() || ! auth()->user()->is_admin) {
-
             return 'Je hebt geen toestemming voor deze operatie.';
+        }
+
+        $news = News::find($id);
+
+        if (! $news) {
+            return 'Nieuwsartikel niet gevonden.';
+        }
+
+        return view('news.edit', compact('news'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        if (! auth()->check() || ! auth()->user()->is_admin) {
+            return 'Je hebt geen toestemming voor deze operatie.';
+        }
+
+        $news = News::find($id);
+
+        if (! $news) {
+            return 'Nieuwsartikel niet gevonden.';
+        }
+
+        $news->title = $request->title;
+        $news->content = $request->content;
+
+        if ($request->hasFile('image')) {
+            $news->image = $request->file('image')->store('news-images', 'public');
+        }
+
+        $news->save();
+
+        return redirect('/news');
+    }
+
+    public function destroy($id)
+    {
+        if (! auth()->check() || ! auth()->user()->is_admin) {
+            return 'Je hebt geen toestemming voor deze operatie.';
+        }
+
+        $news = News::find($id);
+
+        if (! $news) {
+            return 'Nieuwsartikel niet gevonden.';
         }
 
         $news->delete();
 
         return redirect('/news');
-    }
-
-    public function edit(News $news)
-    {
-
-        if (! auth()->check() || ! auth()->user()->is_admin) {
-
-            return 'Je hebt geen toestemming voor deze operatie.';
-
-        }
-
-        return view('news.edit', compact('news'));
-
-    }
-
-    public function update(Request $request, News $news)
-    {
-
-        if (! auth()->check() || ! auth()->user()->is_admin) {
-
-            return 'Je hebt geen toestemming voor deze operatie.';
-
-        }
-
-        $news->update([
-            'title' => $request->title,
-            'content' => $request->content,
-        ]);
-
-        return redirect('/news');
-
     }
 }

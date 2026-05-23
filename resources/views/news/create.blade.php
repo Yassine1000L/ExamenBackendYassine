@@ -16,7 +16,7 @@ body {
 
     <h1 style="background-color: rgba(0, 0, 0, 0.6); color: white; padding: 15px; border-radius: 10px; display: inline-block;">Nieuws toevoegen</h1>
 
-    <form action="/news" method="POST">
+    <form action="/news" method="POST" enctype="multipart/form-data">
 
         @csrf
 
@@ -25,6 +25,10 @@ body {
         <br><br>
 
         <textarea name="content" placeholder="Inhoud"></textarea>
+
+        <br><br>
+
+        <input type="file" name="image" accept="image/jpeg,image/png,image/jpg,image/gif">
 
         <br><br>
 

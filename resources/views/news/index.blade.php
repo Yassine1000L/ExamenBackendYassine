@@ -80,6 +80,8 @@ form {
         <tr>
             <th>Titel</th>
             <th>Inhoud</th>
+            <th>Afbeelding</th>
+            <th>Auteur</th>
             <th>Acties</th>
         </tr>
 
@@ -88,6 +90,16 @@ form {
         <tr>
             <td>{{ $article->title }}</td>
             <td>{{ $article->content }}</td>
+            <td>
+                @if ($article->image)
+                    <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" style="width: 100px; height: auto;">
+                @else
+                    Geen
+                @endif
+            </td>
+            <td>
+                <a href="/users/{{ $article->user_id }}">Bekijk profiel</a>
+            </td>
             <td>
                 <a href="/news/{{ $article->id }}">
                     <button>Bekijk</button>

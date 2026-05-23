@@ -71,8 +71,24 @@ form {
         </tr>
 
         <tr>
+            <th>Afbeelding</th>
+            <td>
+                @if ($news->image)
+                    <img src="{{ asset('storage/' . $news->image) }}" alt="{{ $news->title }}" style="max-width: 100%; height: auto;">
+                @else
+                    Geen afbeelding
+                @endif
+            </td>
+        </tr>
+
+        <tr>
             <th>Inhoud</th>
             <td>{{ $news->content }}</td>
+        </tr>
+
+        <tr>
+            <th>Publicatiedatum</th>
+            <td>{{ $news->published_at }}</td>
         </tr>
     </table>
 
