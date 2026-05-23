@@ -52,4 +52,14 @@ class User extends Authenticatable
             'is_admin' => 'boolean',
         ];
     }
+
+    public function news()
+    {
+        return $this->hasMany(News::class);
+    }
+
+    public function faqs()
+    {
+        return $this->hasMany(Faq::class);
+    }
 }

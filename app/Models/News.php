@@ -18,4 +18,15 @@ class News extends Model
         'published_at',
         'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // Elk nieuws kan meerdere tags hebben
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }
