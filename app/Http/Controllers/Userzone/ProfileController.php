@@ -4,31 +4,29 @@ namespace App\Http\Controllers\Userzone;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    public function edit(): View
+    public function edit()
     {
         return view('userzone.profile.edit', [
             'user' => auth()->user(),
         ]);
     }
 
-    public function update(Request $request): RedirectResponse
+    public function update(Request $request)
     {
         $user = auth()->user();
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'username' => ['nullable', 'string', 'max:255'],
             'birthday' => ['nullable', 'date'],
             'bio' => ['nullable', 'string', 'max:1000'],
-            'profile_photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'profile_photo' => ['nullable', 'image', 'max:2048'],
         ]);
 
         $user->name = $request->name;
@@ -63,20 +61,20 @@ class ProfileController extends Controller
         return view('userzone.profile.show', compact('user'));
     }
 
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(Request $request)
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
+        $request->validate([
+            'password' => ['required'],
         ]);
 
         $user = auth()->user();
 
+        if (! password_verify($request->password, $user->password)) {
+            return redirect()->back()->withErrors(['password' => 'Wachtwoord is onjuist.'], 'userDeletion');
+        }
+
         Auth::logout();
-
         $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
 
         return redirect('/');
     }

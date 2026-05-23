@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class AdminUserController extends Controller
 {
@@ -36,20 +35,21 @@ class AdminUserController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8'],
         ]);
 
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        $user->password = password_hash($request->password, PASSWORD_DEFAULT);
         $user->is_admin = $request->has('is_admin');
         $user->save();
 
         return redirect('/admin/users');
     }
 
+    // dient om de admin rechten van een gebruiker te toggelen (aan/uit zetten)
     public function toggleAdmin($id)
     {
         if (! auth()->check() || ! auth()->user()->is_admin) {
