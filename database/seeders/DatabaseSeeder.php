@@ -52,7 +52,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => $admin->id,
         ]);
 
-        // Tags koppelen aan nieuws (many-to-many)
+        // Tags koppelen aan nieuws zo heb ik een many-to-many
         $news1->tags()->attach([$tag1->id, $tag2->id]);
         $news2->tags()->attach([$tag2->id, $tag3->id]);
 
