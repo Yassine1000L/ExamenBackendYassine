@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -20,20 +21,53 @@ class ContactController extends Controller
             'message' => ['required', 'string', 'min:10'],
         ]);
 
-        $naam = $request->name;
-        $email = $request->email;
-        $bericht = $request->message;
+        $contact = new Contact;
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->message = $request->message;
+        $contact->save();
 
         $admin = User::where('is_admin', true)->first();
 
         if ($admin) {
-            $onderwerp = 'Contact formulier van '.$naam;
-            $body = 'Naam: '.$naam."\nEmail: ".$email."\nBericht: ".$bericht;
-            $headers = 'From: '.$email;
+            $log = "Onderwerp: Contact formulier van " . $request->name . "\n";
+            $log .= "Naam: " . $request->name . "\n";
+            $log .= "Email: " . $request->email . "\n";
+            $log .= "Bericht: " . $request->message . "\n";
+            $log .= "Datum: " . date('Y-m-d H:i:s') . "\n";
+            $log .= "---\n";
 
-            mail($admin->email, $onderwerp, $body, $headers);
+            file_put_contents(storage_path('logs/contact-emails.log'), $log, FILE_APPEND);
         }
 
         return redirect('/contact')->with('status', 'Bericht verzonden!');
+    }
+
+    public function index()
+    {
+        if (! auth()->check() || ! auth()->user()->is_admin) {
+            return 'Je hebt geen toestemming voor deze operatie.';
+        }
+
+        $contacts = Contact::all();
+
+        return view('admin.contacts.index', compact('contacts'));
+    }
+
+    public function destroy($id)
+    {
+        if (! auth()->check() || ! auth()->user()->is_admin) {
+            return 'Je hebt geen toestemming voor deze operatie.';
+        }
+
+        $contact = Contact::find($id);
+
+        if (! $contact) {
+            return 'Bericht niet gevonden.';
+        }
+
+        $contact->delete();
+
+        return redirect('/admin/contacts');
     }
 }

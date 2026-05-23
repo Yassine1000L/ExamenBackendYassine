@@ -60,6 +60,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/users/create', [AdminUserController::class, 'create']);
     Route::post('/admin/users/create', [AdminUserController::class, 'store']);
     Route::post('/admin/users/{id}/toggle-admin', [AdminUserController::class, 'toggleAdmin']);
+
+    Route::get('/admin/contacts', [ContactController::class, 'index']);
+    Route::delete('/admin/contacts/{id}', [ContactController::class, 'destroy']);
 });
 
 // het zelf gemaakte routes
