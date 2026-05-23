@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -21,19 +20,18 @@ class ContactController extends Controller
             'message' => ['required', 'string', 'min:10'],
         ]);
 
-        $data = [
-            'naam' => $request->name,
-            'email' => $request->email,
-            'bericht' => $request->message,
-        ];
+        $naam = $request->name;
+        $email = $request->email;
+        $bericht = $request->message;
 
         $admin = User::where('is_admin', true)->first();
 
         if ($admin) {
-            Mail::send('emails.contact', compact('data'), function ($mail) use ($admin, $data) {
-                $mail->to($admin->email)
-                     ->subject('Contact formulier van ' . $data['naam']);
-            });
+            $onderwerp = 'Contact formulier van '.$naam;
+            $body = 'Naam: '.$naam."\nEmail: ".$email."\nBericht: ".$bericht;
+            $headers = 'From: '.$email;
+
+            mail($admin->email, $onderwerp, $body, $headers);
         }
 
         return redirect('/contact')->with('status', 'Bericht verzonden!');
