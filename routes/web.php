@@ -12,7 +12,6 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 // news routes
 Route::get('/news', [NewsController::class, 'index']);
-Route::get('/news/{id}', [NewsController::class, 'show']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/news/create', [NewsController::class, 'create']);
@@ -22,9 +21,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/news/{id}', [NewsController::class, 'destroy']);
 });
 
+Route::get('/news/{id}', [NewsController::class, 'show']);
+
 // faq routes
 Route::get('/faq', [FaqController::class, 'index']);
-Route::get('/faq/{id}', [FaqController::class, 'show']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/faq/create', [FaqController::class, 'create']);
@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/faq/{id}', [FaqController::class, 'update']);
     Route::delete('/faq/{id}', [FaqController::class, 'destroy']);
 });
+
+Route::get('/faq/{id}', [FaqController::class, 'show']);
 
 // publieke profielpagina voor alle bezoekers
 Route::get('/users/{id}', [ProfileController::class, 'show']);
