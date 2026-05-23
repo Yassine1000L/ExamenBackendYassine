@@ -3,74 +3,73 @@
 namespace App\Http\Controllers\Userzone;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
-
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): View
+    public function edit(): View
     {
         return view('userzone.profile.edit', [
-            'user' => $request->user(),
+            'user' => auth()->user(),
         ]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request): RedirectResponse
     {
-        $user = $request->user();
+        $user = auth()->user();
 
-        $user->fill($request->safe()->except(['profile_photo']));
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
+            'username' => ['nullable', 'string', 'max:255'],
+            'birthday' => ['nullable', 'date'],
+            'bio' => ['nullable', 'string', 'max:1000'],
+            'profile_photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+        ]);
+
+        $user->name = $request->name;
+
+        if ($user->email !== $request->email) {
+            $user->email_verified_at = null;
+        }
+
+        $user->email = $request->email;
+        $user->username = $request->username;
+        $user->birthday = $request->birthday;
+        $user->bio = $request->bio;
 
         if ($request->hasFile('profile_photo')) {
-            if ($user->profile_photo) {
-                Storage::disk('public')->delete($user->profile_photo);
-            }
-
             $path = $request->file('profile_photo')->store('profile-photos', 'public');
             $user->profile_photo = $path;
         }
 
-        if ($user->isDirty('email')) {
-            $user->email_verified_at = null;
-        }
-
         $user->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return redirect()->route('profile.edit')->with('status', 'profile-updated');
     }
 
-    /**
-     * Display the specified user's public profile.
-     */
-    public function show(string $id): View
+    public function show($id)
     {
-        $user = \App\Models\User::findOrFail($id);
+        $user = User::find($id);
+
+        if (! $user) {
+            return 'Gebruiker niet gevonden.';
+        }
 
         return view('userzone.profile.show', compact('user'));
     }
 
-    /**
-     * Delete the user's account.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
         ]);
 
-        $user = $request->user();
+        $user = auth()->user();
 
         Auth::logout();
 
@@ -79,6 +78,6 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return redirect('/');
     }
 }

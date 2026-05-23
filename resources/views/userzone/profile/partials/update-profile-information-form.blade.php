@@ -13,7 +13,7 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
@@ -44,6 +44,33 @@
                         </p>
                     @endif
                 </div>
+            @endif
+        </div>
+
+        <div>
+            <x-breeze.input-label for="username" :value="__('Username')" />
+            <x-breeze.text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->username)" autocomplete="username" />
+            <x-breeze.input-error class="mt-2" :messages="$errors->get('username')" />
+        </div>
+
+        <div>
+            <x-breeze.input-label for="birthday" :value="__('Verjaardag')" />
+            <x-breeze.text-input id="birthday" name="birthday" type="date" class="mt-1 block w-full" :value="old('birthday', $user->birthday)" />
+            <x-breeze.input-error class="mt-2" :messages="$errors->get('birthday')" />
+        </div>
+
+        <div>
+            <x-breeze.input-label for="bio" :value="__('Over mij')" />
+            <textarea id="bio" name="bio" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" rows="4">{{ old('bio', $user->bio) }}</textarea>
+            <x-breeze.input-error class="mt-2" :messages="$errors->get('bio')" />
+        </div>
+
+        <div>
+            <x-breeze.input-label for="profile_photo" :value="__('Profielfoto')" />
+            <input id="profile_photo" name="profile_photo" type="file" class="mt-1 block w-full" accept="image/jpeg,image/png,image/jpg,image/gif" />
+            <x-breeze.input-error class="mt-2" :messages="$errors->get('profile_photo')" />
+            @if ($user->profile_photo)
+                <p class="mt-2 text-sm text-gray-600">Huidige foto: <a href="{{ asset('storage/' . $user->profile_photo) }}" target="_blank">Bekijken</a></p>
             @endif
         </div>
 
