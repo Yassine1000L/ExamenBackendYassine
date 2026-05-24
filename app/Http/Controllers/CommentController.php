@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    // enkel ingelogde gebruikers mogen reageren
     public function store(Request $request, $news_id)
     {
         if (! auth()->check()) {
@@ -33,6 +34,7 @@ class CommentController extends Controller
         return redirect('/news/'.$news->id);
     }
 
+    // enkel admins mogen reacties verwijderen
     public function destroy($id)
     {
         if (! auth()->check() || ! auth()->user()->is_admin) {

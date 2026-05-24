@@ -40,6 +40,7 @@ class ProfileController extends Controller
         $user->birthday = $request->birthday;
         $user->bio = $request->bio;
 
+        // profielfoto opslaan in storage/app/public/profile-photos
         if ($request->hasFile('profile_photo')) {
             $path = $request->file('profile_photo')->store('profile-photos', 'public');
             $user->profile_photo = $path;
@@ -69,6 +70,7 @@ class ProfileController extends Controller
 
         $user = auth()->user();
 
+        // controleer wachtwoord voor account verwijderd mag worden
         if (! password_verify($request->password, $user->password)) {
             return redirect()->back()->withErrors(['password' => 'Wachtwoord is onjuist.'], 'userDeletion');
         }

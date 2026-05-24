@@ -64,7 +64,7 @@ Extra admin contacts - ContactController.php lijn 46 index, route /admin/contact
 ## Installatiehandleiding
 
 1. Clone de repository
-   git clone
+   git clone 
    cd ExamenBackendYassine
 
 2. Installeer dependencies

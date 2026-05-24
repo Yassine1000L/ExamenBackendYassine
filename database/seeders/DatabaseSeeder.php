@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        // Admin gebruiker
+        // admin account om te kunnen inloggen
         $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@ehb.be',
@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
         ]);
 
-        // Gewone gebruiker
+        // gewone testgebruiker zonder admin rechten
         User::create([
             'name' => 'Gebruiker',
             'email' => 'gebruiker@example.com',
@@ -32,12 +32,12 @@ class DatabaseSeeder extends Seeder
             'is_admin' => false,
         ]);
 
-        // Tags
+        // tags voor nieuwsartikelen (many-to-many)
         $tag1 = Tag::create(['name' => 'Transfer']);
         $tag2 = Tag::create(['name' => 'Wedstrijd']);
         $tag3 = Tag::create(['name' => 'Jeugd']);
 
-        // Nieuwsartikelen
+        // voorbeeld nieuwsartikelen
         $news1 = News::create([
             'title' => 'Nieuwe speler aangetrokken',
             'content' => 'FC Erasmus heeft een nieuwe spits aangetrokken voor het komende seizoen.',
@@ -52,11 +52,11 @@ class DatabaseSeeder extends Seeder
             'user_id' => $admin->id,
         ]);
 
-        // Tags koppelen aan nieuws zo heb ik een many-to-many
+        // koppel tags aan nieuws via de pivot tabel (many-to-many)
         $news1->tags()->attach([$tag1->id, $tag2->id]);
         $news2->tags()->attach([$tag2->id, $tag3->id]);
 
-        // FAQs
+        // voorbeeld FAQs in verschillende categorieen
         Faq::create([
             'question' => 'Hoe laat is de training?',
             'answer' => 'De training is elke dinsdag en donderdag om 18u.',

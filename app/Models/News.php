@@ -19,17 +19,19 @@ class News extends Model
         'user_id',
     ];
 
+    // elk nieuwsartikel hoort bij een gebruiker
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Elk nieuws kan meerdere tags hebben
+    // elk nieuws kan meerdere tags hebben
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
     }
 
+    // elk nieuws kan meerdere reacties hebben
     public function comments()
     {
         return $this->hasMany(Comment::class);

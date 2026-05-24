@@ -11,6 +11,7 @@ class FaqController extends Controller
     {
         $faqs = Faq::all();
 
+        // groepeer FAQs per category, bijv. 'Training' enz.
         $grouped = [];
         foreach ($faqs as $faq) {
             $grouped[$faq->category][] = $faq;

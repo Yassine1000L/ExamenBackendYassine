@@ -9,12 +9,13 @@ use App\Http\Controllers\Userzone\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
-// de hoofdroute = ' / '
+// hoofdroute - toon de welcome pagina
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
-// news routes
+// nieuws - overzicht voor iedereen
 Route::get('/news', [NewsController::class, 'index']);
 
+// nieuws - beheer enkel voor ingelogde gebruikers (admin)
 Route::middleware('auth')->group(function () {
     Route::get('/news/create', [NewsController::class, 'create']);
     Route::post('/news', [NewsController::class, 'store']);
@@ -23,11 +24,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/news/{id}', [NewsController::class, 'destroy']);
 });
 
+// nieuws - detailpagina voor iedereen met bijhorende comments en gebruikers die de comments hebben geschreven
 Route::get('/news/{id}', [NewsController::class, 'show']);
 
-// faq routes
+// faq - overzicht voor iedereen
 Route::get('/faq', [FaqController::class, 'index']);
 
+// faq - beheer enkel voor ingelogde gebruikers (admin)
 Route::middleware('auth')->group(function () {
     Route::get('/faq/create', [FaqController::class, 'create']);
     Route::post('/faq', [FaqController::class, 'store']);
@@ -36,36 +39,40 @@ Route::middleware('auth')->group(function () {
     Route::delete('/faq/{id}', [FaqController::class, 'destroy']);
 });
 
+// faq - detailpagina voor iedereen
 Route::get('/faq/{id}', [FaqController::class, 'show']);
 
-// comment routes
+// comments - enkel voor ingelogde gebruikers, admins mogen verwijderen
 Route::middleware('auth')->group(function () {
     Route::post('/news/{id}/comments', [CommentController::class, 'store']);
     Route::delete('/comments/{id}', [CommentController::class, 'destroy']);
 });
 
-// contact routes
+// contact - voor iedereen
 Route::get('/contact', [ContactController::class, 'create']);
 Route::post('/contact', [ContactController::class, 'store']);
 
-// publieke profielpagina voor alle bezoekers
+// publiek profiel - voor alle bezoekers
 Route::get('/users/{id}', [ProfileController::class, 'show']);
 
+// profiel beheer + admin gedeelte - enkel ingelogd
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // admin: gebruikers beheren
     Route::get('/admin/users', [AdminUserController::class, 'index']);
     Route::get('/admin/users/create', [AdminUserController::class, 'create']);
     Route::post('/admin/users/create', [AdminUserController::class, 'store']);
     Route::post('/admin/users/{id}/toggle-admin', [AdminUserController::class, 'toggleAdmin']);
 
+    // admin: contactberichten bekijken en verwijderen
     Route::get('/admin/contacts', [ContactController::class, 'index']);
     Route::delete('/admin/contacts/{id}', [ContactController::class, 'destroy']);
 });
 
-// het zelf gemaakte routes
+// dashboard enkel voor ingelogde + geverifieerde gebruikers
 Route::get('/dashboard', [WelcomeController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';

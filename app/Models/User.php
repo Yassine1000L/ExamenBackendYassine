@@ -53,16 +53,19 @@ class User extends Authenticatable
         ];
     }
 
+    // een gebruiker kan meerdere nieuwsartikelen schrijven
     public function news()
     {
         return $this->hasMany(News::class);
     }
 
+    // een gebruiker kan meerdere FAQs aanmaken
     public function faqs()
     {
         return $this->hasMany(Faq::class);
     }
 
+    // een gebruiker kan meerdere reacties plaatsen
     public function comments()
     {
         return $this->hasMany(Comment::class);

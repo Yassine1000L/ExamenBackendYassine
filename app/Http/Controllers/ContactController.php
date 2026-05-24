@@ -29,12 +29,13 @@ class ContactController extends Controller
 
         $admin = User::where('is_admin', true)->first();
 
+        // log het contactbericht naar een bestand
         if ($admin) {
-            $log = "Onderwerp: Contact formulier van " . $request->name . "\n";
-            $log .= "Naam: " . $request->name . "\n";
-            $log .= "Email: " . $request->email . "\n";
-            $log .= "Bericht: " . $request->message . "\n";
-            $log .= "Datum: " . date('Y-m-d H:i:s') . "\n";
+            $log = 'Onderwerp: Contact formulier van '.$request->name."\n";
+            $log .= 'Naam: '.$request->name."\n";
+            $log .= 'Email: '.$request->email."\n";
+            $log .= 'Bericht: '.$request->message."\n";
+            $log .= 'Datum: '.date('Y-m-d H:i:s')."\n";
             $log .= "---\n";
 
             file_put_contents(storage_path('logs/contact-emails.log'), $log, FILE_APPEND);

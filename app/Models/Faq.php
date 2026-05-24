@@ -18,6 +18,7 @@ class Faq extends Model
         'user_id',
     ];
 
+    // elke faq hoort bij een gebruiker
     public function user()
     {
         return $this->belongsTo(User::class);

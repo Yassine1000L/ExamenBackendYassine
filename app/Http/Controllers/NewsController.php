@@ -35,6 +35,7 @@ class NewsController extends Controller
         $news->published_at = date('Y-m-d H:i:s');
         $news->user_id = auth()->user()->id;
 
+        // afbeelding opslaan in storage/app/public/news-images
         if ($request->hasFile('image')) {
             $news->image = $request->file('image')->store('news-images', 'public');
         }
@@ -44,6 +45,7 @@ class NewsController extends Controller
         return redirect('/news');
     }
 
+    // toon nieuwsartikel met bijhorende comments en gebruikers die de comments hebben geplaatst
     public function show($id)
     {
         $news = News::with('comments.user')->find($id);

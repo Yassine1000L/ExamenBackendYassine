@@ -42,7 +42,9 @@ class AdminUserController extends Controller
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
+        // wachtwoord hashen met password_hash
         $user->password = password_hash($request->password, PASSWORD_DEFAULT);
+        // checkbox: als aangevinkt wordt is_admin true, anders false
         $user->is_admin = $request->has('is_admin');
         $user->save();
 
