@@ -19,6 +19,7 @@ body {
     <form action="/news/{{ $news->id }}" method="POST" enctype="multipart/form-data">
 
         @csrf
+        {{-- zet POST om naar PATCH --}}
         @method('patch')
 
         <input type="text" name="title" value="{{ $news->title }}" required maxlength="255">

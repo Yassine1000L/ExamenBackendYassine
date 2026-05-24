@@ -68,6 +68,7 @@ button {
             <td>
                 <form action="/admin/contacts/{{ $contact->id }}" method="POST">
                     @csrf
+                    {{-- zet POST om naar DELETE via @method --}}
                     @method('DELETE')
                     <button type="submit">Verwijder</button>
                 </form>

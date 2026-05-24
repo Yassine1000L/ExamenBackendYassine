@@ -39,6 +39,7 @@ button {
 
     <h1>Contact</h1>
 
+    {{-- toon statusbericht na verzenden --}}
     @if(session('status'))
         <p style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold;">{{ session('status') }}</p>
     @endif

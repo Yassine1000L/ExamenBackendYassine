@@ -106,6 +106,7 @@ form {
 
     <form action="/news/{{ $news->id }}" method="POST" style="display: inline-block;">
         @csrf
+        {{-- zet POST om naar DELETE --}}
         @method('DELETE')
         <button type="submit">Verwijder nieuws</button>
     </form>
@@ -129,6 +130,7 @@ form {
         @if(auth()->user()->is_admin)
         <form action="/comments/{{ $comment->id }}" method="POST">
             @csrf
+            {{-- zet POST om naar DELETE --}}
             @method('DELETE')
             <button type="submit">Verwijder</button>
         </form>

@@ -111,6 +111,7 @@ form {
 
                 <form action="/news/{{ $article->id }}" method="POST">
                     @csrf
+                    {{-- zet POST om naar DELETE --}}
                     @method('DELETE')
                     <button type="submit">Delete</button>
                 </form>
