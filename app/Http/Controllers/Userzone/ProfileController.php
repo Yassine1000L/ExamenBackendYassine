@@ -51,9 +51,10 @@ class ProfileController extends Controller
         return redirect()->route('profile.edit')->with('status', 'profile-updated');
     }
 
+    // toon profiel met nieuwsartikelen van die gebruiker
     public function show($id)
     {
-        $user = User::find($id);
+        $user = User::with('news')->find($id);
 
         if (! $user) {
             return 'Gebruiker niet gevonden.';

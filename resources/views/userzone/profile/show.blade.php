@@ -70,6 +70,20 @@ body {
 
     </div>
 
+    {{-- nieuwtjes geschreven door deze gebruiker --}}
+    @if(count($user->news) > 0)
+        <div style="background-color: white; padding: 30px; border-radius: 15px; margin-top: 30px; text-align: left;">
+            <h2>Laatste nieuwtjes</h2>
+            @foreach($user->news as $article)
+                <p style="border-bottom: 1px solid #eee; padding: 10px 0;">
+                    <a href="/news/{{ $article->id }}">{{ $article->title }}</a>
+                    <br>
+                    <small>{{ date('d-m-Y', strtotime($article->published_at)) }}</small>
+                </p>
+            @endforeach
+        </div>
+    @endif
+
 </div>
 
 @endsection
