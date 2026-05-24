@@ -64,11 +64,10 @@ Extra admin contacts - ContactController.php lijn 46 index, route /admin/contact
 ## Installatiehandleiding
 
 1. Clone de repository
-   git clone 
+    git clone https://github.com/Yassine1000L/ExamenBackendYassine
    cd ExamenBackendYassine
 
 2. Installeer dependencies
-   
    composer install
    npm install
    
@@ -103,9 +102,9 @@ Extra admin contacts - ContactController.php lijn 46 index, route /admin/contact
 
 ## Gebruikte bronnen
 
-- Cursus Backend modules uit cursus
-- Starterpack van Nico De Blauw (nde blauw)
-- artificiele Intelligentie door hulp te vragen van hoe moet ik beginnen ? Wanner ik aan de slag ben isnhet oké.
+- Cursus Backend Web modules 0-8 (Nico Deblauw)
+- Starterpack van Nico Deblauw (Breeze)
+- Laravel documentatie (laravel.com/docs)
 
 ## Screenshots
 
