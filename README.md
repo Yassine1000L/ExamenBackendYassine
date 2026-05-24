@@ -105,7 +105,7 @@ Extra admin contacts - ContactController.php lijn 46 index, route /admin/contact
 - Cursus Backend Web modules 0-8 (Nico Deblauw)
 - Starterpack van Nico Deblauw (Breeze)
 - Laravel documentatie (laravel.com/docs)
-- AI voor hulp bij code, debugging en uitleg
+- AI voor hulp bij code, debugging en uitleg van laravel alert 
 - 
 
 ## Screenshots
