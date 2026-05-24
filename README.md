@@ -73,26 +73,26 @@ Extra admin contacts - ContactController.php lijn 46 index, route /admin/contact
    npm install
    
 
-3. **Omgeving instellen**
-   ```
+3. Omgeving instellen
+   
    copy .env.example .env
    php artisan key:generate
-   ```
+   
 
-4. **Storage link voor afbeeldingen**
-   ```
+4. Storage link voor afbeeldingen
+   
    php artisan storage:link
-   ```
+   
 
-5. **Migraties en seeders uitvoeren**
-   ```
+5. Migraties en seeders uitvoeren
+   
    php artisan migrate:fresh --seed
-   ```
+   
 
-6. **Frontend builden**
-   ```
+6. Frontend builden
+   
    npm run build
-   ```
+   
 
 7. Server starten
    
@@ -109,14 +109,6 @@ Extra admin contacts - ContactController.php lijn 46 index, route /admin/contact
 
 ## Screenshots
 
-<a href="/image.png"></a>
-
-<a href="/image.png"></a> //home pagina van iemand die nog niet ingelogd is
-<a href="/image-2.png"></a> //home page van een admin user
-<a href="/image-3.png"></a> //home page van een gewone gebruiker 
-
-
-
-
-
-
+![Home pagina - niet ingelogd](screenshots/image.png)
+![Home pagina - admin](screenshots/image-2.png)
+![Home pagina - gewone gebruiker](screenshots/image-3.png)
