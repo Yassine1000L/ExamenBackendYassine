@@ -38,6 +38,7 @@ class ContactController extends Controller
             $log .= 'Datum: '.date('Y-m-d H:i:s')."\n";
             $log .= "---\n";
 
+            //versturen van email is niet mogelijk, dus we loggen het bericht naar een bestand
             file_put_contents(storage_path('logs/contact-emails.log'), $log, FILE_APPEND);
         }
 
